@@ -14,7 +14,7 @@ use SplFileInfo;
 
 class DownloadPullRequests extends Command
 {
-    protected $signature   = 'dl-prs {author=ziadoz} {--skip-meta-json}';
+    protected $signature   = 'dl-prs {author=ziadoz} {--skip-meta-json} {--skip-full-json}';
     protected $description = 'Download GitHub pull requests as JSON';
 
     protected string $author;
@@ -38,7 +38,9 @@ class DownloadPullRequests extends Command
             $this->downloadPullRequestMetaJson();
         }
 
-        $this->downloadPullRequestJson();
+        if (! $this->option('skip-full-json')) {
+            $this->downloadPullRequestJson();
+        }
 
         return self::SUCCESS;
     }
@@ -81,7 +83,7 @@ class DownloadPullRequests extends Command
         $this->components->info('Downloading pull request full JSON...');
 
         $files = collect((new Filesystem)->allFiles(storage_path('prs')))
-            ->filter(fn (SplFileInfo $file): bool => ! str_contains($json->getFilename(), '-full.json'))
+            ->filter(fn (SplFileInfo $file): bool => ! str_contains($file->getFilename(), '-full.json'))
             ->toArray();
 
         $progress = $this->output->createProgressBar(count($files));
