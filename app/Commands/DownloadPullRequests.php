@@ -8,13 +8,14 @@ use Generator;
 use Github\ResultPager;
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Str;
 use LaravelZero\Framework\Commands\Command;
 use SplFileInfo;
 
 class DownloadPullRequests extends Command
 {
-    protected $signature   = 'dl-prs {author=ziadoz} {--skip-meta-json} {--skip-full-json}';
+    protected $signature   = 'dl-prs {author=ziadoz} {--skip-meta-json} {--skip-full-json} {--zip}';
     protected $description = 'Download GitHub pull requests as JSON';
 
     protected string $author;
@@ -32,14 +33,16 @@ class DownloadPullRequests extends Command
             return self::FAILURE;
         }
 
-        (new Filesystem)->makeDirectory(storage_path('prs/'), 0744, true, true);
-
         if (! $this->option('skip-meta-json')) {
             $this->downloadPullRequestMetaJson();
         }
 
         if (! $this->option('skip-full-json')) {
             $this->downloadPullRequestJson();
+        }
+
+        if ($this->option('zip')) {
+            $this->zipPullRequests();
         }
 
         return self::SUCCESS;
@@ -100,6 +103,19 @@ class DownloadPullRequests extends Command
         }
 
         $progress->finish();
+    }
+
+    protected function zipPullRequests(): void
+    {
+        $this->components->info('Zipping pull request JSON...');
+
+        Process::run(sprintf(
+            '(cd %s && zip -r ./prs-%s.zip ./prs/%s/ && cd %s)',
+            storage_path(),
+            Carbon::now()->format('Ymdhis'),
+            $this->author,
+            base_path(),
+        ))->throw();
     }
 
     protected function getPullRequests(string ...$opts): Generator
