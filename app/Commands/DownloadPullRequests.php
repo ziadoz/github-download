@@ -78,6 +78,8 @@ class DownloadPullRequests extends Command
         $this->repeatWithOpts($getPullRequests, ['archived:true']);
     }
 
+    // @see: https://github.com/KnpLabs/php-github-api/tree/master/doc
+    // @see: https://github.com/GrahamCampbell/Laravel-GitHub/issues/79
     public function downloadPullRequestJson(): void
     {
         $this->components->info('Downloading pull request full JSON...');
