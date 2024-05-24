@@ -121,7 +121,10 @@ class DownloadGists extends Command
         $path = storage_path(sprintf(
             'gists/full/%s/%s',
             Carbon::parse($gist['created_at'])->format('Y'),
-            Str::slug($gist['description']),
+            // Forks might not have a description, so we'll use the ID there instead.
+            ! empty($gist['description'])
+                ? Str::slug($gist['description'])
+                : $gist['id']
         ));
 
         (new Filesystem)->makeDirectory($path, 0744, true, true);
