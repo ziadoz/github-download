@@ -15,7 +15,7 @@ use SplFileInfo;
 
 class DownloadPullRequests extends Command
 {
-    protected $signature   = 'dl-prs {author=ziadoz} {--skip-meta-json} {--skip-full-json} {--zip}';
+    protected $signature   = 'dl-prs {author=ziadoz} {--skip-meta-json} {--skip-full-json} {--zip} {--fresh}';
     protected $description = 'Download GitHub pull requests as JSON';
 
     protected string $author;
@@ -33,6 +33,10 @@ class DownloadPullRequests extends Command
             return self::FAILURE;
         }
 
+        if ($this->option('fresh')) {
+            $this->clearStorage();
+        }
+
         if (! $this->option('skip-meta-json')) {
             $this->downloadPullRequestMetaJson();
         }
@@ -46,6 +50,16 @@ class DownloadPullRequests extends Command
         }
 
         return self::SUCCESS;
+    }
+
+    protected function clearStorage(): void
+    {
+        $this->components->info('Clearing storage...');
+
+        Process::run(sprintf(
+            'find %s -not -name ".gitignore" -delete',
+            storage_path('prs'),
+        ));
     }
 
     protected function downloadPullRequestMetaJson(): void

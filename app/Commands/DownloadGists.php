@@ -15,7 +15,7 @@ use SplFileInfo;
 
 class DownloadGists extends Command
 {
-    protected $signature   = 'dl-gists {--skip-meta-json} {--skip-clone} {--zip}';
+    protected $signature   = 'dl-gists {--skip-meta-json} {--skip-clone} {--zip} {--fresh}';
     protected $description = 'Download GitHub gists as JSON';
 
     protected string $author;
@@ -31,6 +31,10 @@ class DownloadGists extends Command
             return self::FAILURE;
         }
 
+        if ($this->option('fresh')) {
+            $this->clearStorage();
+        }
+
         if (! $this->option('skip-meta-json')) {
             $this->downloadGistsMetaJson();
         }
@@ -44,6 +48,16 @@ class DownloadGists extends Command
         }
 
         return self::SUCCESS;
+    }
+
+    protected function clearStorage(): void
+    {
+        $this->components->info('Clearing storage...');
+
+        Process::run(sprintf(
+            'find %s -not -name ".gitignore" -delete',
+            storage_path('gists'),
+        ));
     }
 
     protected function downloadGistsMetaJson(): void
