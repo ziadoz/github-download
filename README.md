@@ -28,3 +28,5 @@ A GitHub token needs to be setup with the following permissions:
     * `read:org`
     * `manage_runners:org`
 * `gist`
+
+Then add it to `.env.sh` in the project root and run: `source .env.sh` to make it available.
