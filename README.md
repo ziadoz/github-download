@@ -1,19 +1,14 @@
 # GitHub Download
 
+A command line utility to download your GitHub pull requests and gists, built using [Laravel Zero](https://laravel-zero.com/).
+
 ## Install
 
 ```
 composer install
 ```
 
-## Usage
-
-```
-php application dl-prs
-php application dl-gists
-```
-
-## GitHub Token
+## Setup
 
 A GitHub token needs to be setup with the following permissions:
 
@@ -30,3 +25,10 @@ A GitHub token needs to be setup with the following permissions:
 * `gist`
 
 Then add it to `.env.sh` in the project root and run: `source .env.sh` to make it available.
+
+## Usage
+
+```
+php application dl-prs
+php application dl-gists
+```
