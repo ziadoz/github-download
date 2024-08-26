@@ -10,6 +10,8 @@ composer install
 
 ## Setup
 
+### Token
+
 Create a GitHub token with the following permissions:
 
 * `repo`
@@ -24,9 +26,11 @@ Create a GitHub token with the following permissions:
     * `manage_runners:org`
 * `gist`
 
-Run `cp .env.sh.sample .env.sh` to create a `.env.sh` file in the project root, and then add the newly created token to it.
+### Environment
 
-Run `source .env.sh` to make the token available.
+Run `cp .env.sh.sample .env.sh` to create a `.env.sh` file in the project root, and add the newly created token to it.
+
+Then run `source .env.sh` to make the token available.
 
 Alternatively, you can add `export GITHUB_TOKEN="your-token"` directly to your ZSH `~/.zprofile` or `~/.zshrc` instead.
 
