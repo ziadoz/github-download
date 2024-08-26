@@ -40,3 +40,7 @@ Alternatively, you can add `export GITHUB_TOKEN="your-token"` directly to your Z
 php application dl-prs
 php application dl-gists
 ```
+
+Your pull requests and gists JSON files will be downloaded to `storage/prs` and `storage/gists`.
+
+Add the `--zip` option to either command to get the output in a zip file.
