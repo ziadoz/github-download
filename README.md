@@ -28,7 +28,7 @@ Create a GitHub token with the following permissions:
 
 ### Environment
 
-Run `cp .env.sh.sample .env.sh` to create a `.env.sh` file in the project root, and add the newly created token to it.
+Run `cp .env.sh.sample .env.sh` to create a `.env.sh` file in the project root, and add the token to it.
 
 Then run `source .env.sh` to make the token available.
 
