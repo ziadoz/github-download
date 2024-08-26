@@ -15,7 +15,7 @@ use SplFileInfo;
 
 class DownloadPullRequests extends Command
 {
-    protected $signature   = 'dl-prs {author=ziadoz} {--skip-meta-json} {--skip-full-json} {--zip} {--fresh}';
+    protected $signature   = 'dl-prs {author} {--skip-meta-json} {--skip-full-json} {--zip} {--fresh}';
     protected $description = 'Download GitHub pull requests as JSON';
 
     protected string $author;

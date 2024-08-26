@@ -36,10 +36,9 @@ Alternatively, you can add `export GITHUB_TOKEN="your-token"` directly to your Z
 
 ## Usage
 
-```
-php application dl-prs
-php application dl-gists
-```
+To download pull requests:` php application dl-prs <username>`
+
+To download gists: `php application dl-gists`
 
 Your pull requests and gists JSON files will be downloaded to `storage/prs` and `storage/gists`.
 
