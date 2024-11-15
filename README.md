@@ -2,6 +2,8 @@
 
 A command line utility to download your GitHub pull requests and gists, built using [Laravel Zero](https://laravel-zero.com/).
 
+![](output.png)
+
 ## Install
 
 ```
