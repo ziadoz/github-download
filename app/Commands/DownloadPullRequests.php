@@ -15,7 +15,7 @@ use SplFileInfo;
 
 class DownloadPullRequests extends Command
 {
-    protected $signature   = 'dl-prs {author} {--skip-meta-json} {--skip-full-json} {--zip} {--fresh}';
+    protected $signature = 'dl-prs {author} {--skip-meta-json} {--skip-full-json} {--zip} {--fresh}';
     protected $description = 'Download GitHub pull requests as JSON';
 
     protected string $author;
@@ -160,9 +160,9 @@ class DownloadPullRequests extends Command
 
     protected function savePullRequestMetaJson(array $pr): void
     {
-        $repo   = Str::of($pr['repository_url'])->replace(['https://api.github.com/repos/', '/'], ['', '-'])->toString();
+        $repo = Str::of($pr['repository_url'])->replace(['https://api.github.com/repos/', '/'], ['', '-'])->toString();
         $number = Str::of($pr['number'])->toInteger();
-        $path   = storage_path(sprintf('prs/%s/%s', $this->author, $repo));
+        $path = storage_path(sprintf('prs/%s/%s', $this->author, $repo));
 
         (new Filesystem)->makeDirectory($path, 0744, true, true);
 
@@ -185,9 +185,9 @@ class DownloadPullRequests extends Command
 
     protected function savePullRequestJson(array $pr): void
     {
-        $repo   = Str::of($pr['base']['repo']['full_name'])->replace(['https://api.github.com/repos/', '/'], ['', '-'])->toString();
+        $repo = Str::of($pr['base']['repo']['full_name'])->replace(['https://api.github.com/repos/', '/'], ['', '-'])->toString();
         $number = Str::of($pr['number'])->toInteger();
-        $path   = storage_path(sprintf('prs/%s/%s', $this->author, $repo));
+        $path = storage_path(sprintf('prs/%s/%s', $this->author, $repo));
 
         (new Filesystem)->makeDirectory($path, 0744, true, true);
 
