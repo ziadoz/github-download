@@ -15,7 +15,6 @@
         "concat_space": {
             "spacing": "one"
         },
-        "declare_strict_types": true,
         "no_unused_imports": true,
         "single_line_empty_body" : false
     }
