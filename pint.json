@@ -4,7 +4,7 @@
     "rules": {
         "binary_operator_spaces": {
             "operators": {
-                "=>": "align_single_space_minimal"
+                "=>": "at_least_single_space"
             }
         },
         "class_attributes_separation": {
