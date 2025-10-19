@@ -27,7 +27,7 @@ class DownloadPullRequests extends Command
     {
         $this->author = $this->argument('author');
 
-        if (! env('GITHUB_TOKEN')) {
+        if (! env('GITHUB_TOKEN') || empty(env('GITHUB_TOKEN'))) {
             $this->components->error('Missing environment variable: GITHUB_TOKEN');
 
             return self::FAILURE;

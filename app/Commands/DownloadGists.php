@@ -25,7 +25,7 @@ class DownloadGists extends Command
      */
     public function handle(): int
     {
-        if (! env('GITHUB_TOKEN')) {
+        if (! env('GITHUB_TOKEN') || empty(env('GITHUB_TOKEN'))) {
             $this->components->error('Missing environment variable: GITHUB_TOKEN');
 
             return self::FAILURE;
