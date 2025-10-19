@@ -49,5 +49,8 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "bin": ["application"]
+    "bin": ["application"],
+    "scripts": {
+        "lint": ["@php vendor/bin/pint --parallel"]
+    }    
 }

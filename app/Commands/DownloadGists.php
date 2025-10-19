@@ -3,7 +3,6 @@
 namespace App\Commands;
 
 use Carbon\Carbon;
-use Exception;
 use Generator;
 use Github\ResultPager;
 use GrahamCampbell\GitHub\Facades\GitHub;
@@ -11,11 +10,10 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Str;
 use LaravelZero\Framework\Commands\Command;
-use SplFileInfo;
 
 class DownloadGists extends Command
 {
-    protected $signature   = 'dl-gists {--skip-meta-json} {--skip-clone} {--zip} {--fresh}';
+    protected $signature = 'dl-gists {--skip-meta-json} {--skip-clone} {--zip} {--fresh}';
     protected $description = 'Download GitHub gists as JSON';
 
     protected string $author;
